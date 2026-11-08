@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content="Ứng dụng TypeScript mô phỏng xử lý thanh toán đơn hàng và biên nhận."
+    />
+    <title>Xử lý thanh toán đơn hàng</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <p class="eyebrow">Day 42 · TypeScript</p>
+        <h1>Xử lý thanh toán đơn hàng</h1>
+        <p class="subtitle">
+          Nhập thông tin để mô phỏng thanh toán, nhận biên nhận và tra cứu lại
+          biên nhận trong phiên chạy hiện tại.
+        </p>
+      </header>
+
+      <main class="layout">
+        <section class="card" aria-labelledby="payment-heading">
+          <h2 id="payment-heading">Thanh toán</h2>
+          <form id="payment-form" novalidate>
+            <div class="field">
+              <label for="order-id">Mã đơn hàng</label>
+              <input
+                id="order-id"
+                name="orderId"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="Ví dụ: 1001"
+              />
+            </div>
+
+            <div class="field">
+              <label for="amount">Số tiền (VND)</label>
+              <input
+                id="amount"
+                name="amount"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                placeholder="Ví dụ: 250000"
+              />
+            </div>
+
+            <div class="field">
+              <label for="payment-method">Phương thức thanh toán</label>
+              <select id="payment-method" name="method">
+                <option value="COD">COD (nhận hàng)</option>
+                <option value="BANK_TRANSFER">Chuyển khoản ngân hàng</option>
+                <option value="E_WALLET">Ví điện tử</option>
+              </select>
+            </div>
+
+            <button type="submit" class="button button-primary">
+              Thanh toán
+            </button>
+          </form>
+
+          <div
+            id="payment-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+        </section>
+
+        <div class="column">
+          <section class="card" aria-labelledby="receipts-heading">
+            <div class="section-header">
+              <h2 id="receipts-heading">Biên nhận</h2>
+              <span id="receipt-count" class="badge">0</span>
+            </div>
+            <p id="receipts-empty" class="empty-state">
+              Chưa có biên nhận nào.
+            </p>
+            <ul id="receipt-list" class="receipt-list"></ul>
+          </section>
+
+          <section class="card" aria-labelledby="search-heading">
+            <h2 id="search-heading">Tìm biên nhận</h2>
+            <form id="search-form" class="search-form" novalidate>
+              <div class="field">
+                <label for="receipt-id">Mã biên nhận</label>
+                <input
+                  id="receipt-id"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  placeholder="Ví dụ: 1"
+                />
+              </div>
+              <button type="submit" class="button">Tìm biên nhận</button>
+            </form>
+
+            <div
+              id="search-feedback"
+              class="feedback"
+              role="status"
+              aria-live="polite"
+              hidden
+            ></div>
+          </section>
+        </div>
+      </main>
+
+      <section class="card guard-panel" aria-labelledby="guard-heading">
+        <details>
+          <summary>
+            <span id="guard-heading">Kiểm thử type guard</span>
+          </summary>
+          <p class="hint">
+            Chạy nhanh <code>isPaymentRequest</code> với dữ liệu hợp lệ và không
+            hợp lệ, bao gồm phương thức không nằm trong danh sách cho phép.
+          </p>
+          <button id="guard-demo" type="button" class="button">
+            Chạy kiểm thử
+          </button>
+          <ul id="guard-results" class="guard-results"></ul>
+        </details>
+      </section>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
